@@ -90,8 +90,10 @@ public class BookingStepdefs {
 
     @And("I click on My Dashboard button under account menu")
     public void iClickOnButtonUnderAccountMenu() {
-        driver.findElement(By.id("current_account")).click();
-        driver.findElement(By.xpath("//div[@class='profile-menu__item profile_menu__item--mydashboard']/a")).click();
+        driver.findElement(By.xpath("//span[contains(text(),\"Your account\")]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),\"Manage account\")]")).click();
+        driver.findElement(By.xpath("//a[@data-trackname=\"Dashboard\"]")).click();
+        //driver.findElement(By.xpath("//div[@class='profile-menu__item profile_menu__item--mydashboard']/a")).click();
     }
 
     @Then("My Dashboard page is opened")
@@ -219,7 +221,7 @@ public class BookingStepdefs {
 
     @And("I click on Next: Final Details button")
     public void iClickOnNextFinalDetailsButton() {
-        driver.findElement(By.xpath("(//button[@type=\"submit\"])[1]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),\"Final\")]")).click();
     }
 
 

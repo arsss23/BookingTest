@@ -1,4 +1,5 @@
 Feature: Booking feature
+  #This test fails sometimes because the dropdown menu changes might be Booking doing some sort of AB testing or staged rollout because
   Scenario: Account creation
     Given I am in Sign Up page
     When I enter valid user email
