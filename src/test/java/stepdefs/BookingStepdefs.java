@@ -1,9 +1,14 @@
 package stepdefs;
 
-import io.cucumber.java.en.And;
+/*import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.When;*/
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
+import cucumber.api.java.en.Then;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -116,13 +121,13 @@ public class BookingStepdefs {
         clickOnCreateAccountButton();
     }
 
-    @When("I set up destination as {string}")
-    public void iSetUpDestinationAs(String arg0) {
+    @When("^I set up destination as \"([^\"]*)\"$")
+    public void iSetUpDestinationAs(String arg0) throws Throwable {
         driver.findElement(By.id("ss")).sendKeys(arg0);
     }
 
-    @And("I set dates {string} - {string}")
-    public void iSetDates(String arg0, String arg1) {
+    @And("^I set dates \"([^\"]*)\" - \"([^\"]*)\"$")
+    public void iSetDates(String arg0, String arg1) throws Throwable {
         this.selectedStartDates = arg0;
         this.selectedEndDates = arg1;
         String[] months = {"January", "February", "March", "April", "May", "June",
@@ -145,8 +150,8 @@ public class BookingStepdefs {
         driver.findElement(By.xpath("//span[@aria-label='" + endDate + "']")).click();
     }
 
-    @And("I select {string} adults and {string} children")
-    public void iSelectAdultsAndChildren(String arg0, String arg1) {
+    @And("^I select \"([^\"]*)\" adults and \"([^\"]*)\" children$")
+    public void iSelectAdultsAndChildren(String arg0, String arg1) throws Throwable {
         driver.findElement(By.id("xp__guests__toggle")).click();
         String currentAmount = driver.findElement(By.xpath("//div[@class=\"sb-group__field sb-group__field-adults\"]/div/div[2]/span")).getText();
         while (Integer.parseInt(currentAmount) < Integer.parseInt(arg0)) {
@@ -233,7 +238,7 @@ public class BookingStepdefs {
     }
 
 
-    @And("I click on Choose your room for the cheapest hotel in the list with a rating above {string} stars")
+    @And("^I click on Choose your room for the cheapest hotel in the list with a rating above \"([^\"]*)\" stars$")
     public void iClickOnChooseYourRoomForTheCheapestHotelInTheListWithARatingAboveStars(String arg0) throws Throwable {
         driver.findElement(By.xpath("//li[@class=\" sort_category   sort_price \"]/a")).click();
         int stars = Integer.parseInt(arg0);
@@ -264,5 +269,4 @@ public class BookingStepdefs {
         wait.until(ExpectedConditions.elementToBeClickable(reserveButton));
         reserveButton.click();
     }
-
 }
