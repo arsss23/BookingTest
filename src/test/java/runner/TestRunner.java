@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resource",
-        glue = "stepdefs.BookingStepdefs"
+        glue = "stepdefs"
 )
 
 public class TestRunner {
