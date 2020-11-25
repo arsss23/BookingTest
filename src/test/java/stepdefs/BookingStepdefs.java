@@ -54,7 +54,7 @@ public class BookingStepdefs {
         }
     }
 
-    @Given("I am in Sign Up page")
+    @Given("^I am in Sign Up page$")
     public void iAmInSignUpPage() {
         WebDriverManager.chromedriver().setup();
         WebDriverManager.firefoxdriver().setup();
@@ -64,36 +64,36 @@ public class BookingStepdefs {
         driver.findElement(By.id("onetrust-accept-btn-handler")).click();
     }
 
-    @When("I enter valid user email")
+    @When("^I enter valid user email$")
     public void iEnterValidUserEmail() {
         this.email = getSaltString(10) + "@" + getSaltString(6) + ".com";
         driver.findElement(By.id("login_name_register")).sendKeys(this.email);
     }
 
-    @And("click on GET STARTED button")
+    @And("^click on GET STARTED button$")
     public void clickOnGETSTARTEDButton() {
         driver.findElement(By.xpath("//button[@type='submit']/span")).click();
     }
 
-    @When("I enter valid password")
+    @When("^I enter valid password$")
     public void iEnterValidPassword() {
         String password = getSaltString(10) + "a";
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.id("confirmed_password")).sendKeys(password);
     }
 
-    @And("click on Create Account button")
+    @And("^click on Create Account button$")
     public void clickOnCreateAccountButton() {
         driver.findElement(By.xpath("//button[@type='submit']/span")).click();
         driver.findElement(By.xpath("//button[@title=\"Close\"]")).click();
     }
 
-    @And("main page is opened")
+    @And("^main page is opened$")
     public void mainPageIsOpened() {
         driver.findElement(By.id("profile-menu-trigger--title")).isDisplayed();
     }
 
-    @And("I click on My Dashboard button under account menu")
+    @And("^I click on My Dashboard button under account menu$")
     public void iClickOnButtonUnderAccountMenu() {
         driver.findElement(By.xpath("//span[contains(text(),\"Your account\")]")).click();
         driver.findElement(By.xpath("//span[contains(text(),\"Manage account\")]")).click();
@@ -101,18 +101,18 @@ public class BookingStepdefs {
         //driver.findElement(By.xpath("//div[@class='profile-menu__item profile_menu__item--mydashboard']/a")).click();
     }
 
-    @Then("My Dashboard page is opened")
+    @Then("^My Dashboard page is opened$")
     public void myDashboardPageIsOpened() {
         driver.findElement(By.xpath("//ul[@class='profile-area__nav']/li[@class='selected']/a")).isDisplayed();
     }
 
-    @And("correct value is prefilled in email verification placeholder")
+    @And("^correct value is prefilled in email verification placeholder$")
     public void correctValueIsPrefilledInEmailVerificationPlaceholder() {
         String displayedEmail = driver.findElement(By.xpath("//div[@class='email-confirm-banner__email']/input")).getAttribute("value");
         Assert.assertEquals(this.email.toUpperCase(), displayedEmail.toUpperCase());
     }
 
-    @Given("I have account created")
+    @Given("^I have account created$")
     public void iHaveAccountCreated() {
         iAmInSignUpPage();
         iEnterValidUserEmail();
@@ -165,12 +165,12 @@ public class BookingStepdefs {
         }
     }
 
-    @And("I click on Search button")
+    @And("^I click on Search button$")
     public void iClickOnSearchButton() {
         driver.findElement(By.xpath("//div[@class='sb-searchbox-submit-col -submit-button ']/button")).click();
     }
 
-    @And("I click on Choose your room for fist hotel in the list")
+    @And("^I click on Choose your room for fist hotel in the list$")
     public void iClickOnChooseYourRoomForFistHotelInTheList() throws Throwable {
         this.hotelName = driver.findElement(By.xpath("(//a[@class=\"js-sr-hotel-link hotel_name_link url\"]/span)[1]")).getText();
         this.rating = driver.findElement(By.xpath("(//div[@class = \"bui-review-score__badge\"])[1]")).getText();
@@ -179,7 +179,7 @@ public class BookingStepdefs {
 
     }
 
-    @And("Hotel Details page is opened for selected hotel")
+    @And("^Hotel Details page is opened for selected hotel$")
     public void hotelDetailsPageIsOpenedForSelectedHotel() {
         ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs2.get(1));
@@ -188,18 +188,18 @@ public class BookingStepdefs {
         assert isSameRating && isSameName;
     }
 
-    @And("I click on Reserve button for recommended room")
+    @And("^I click on Reserve button for recommended room$")
     public void iClickOnReserveButtonForRecommendedRoom() {
         driver.findElement(By.xpath("//div[@id=\"group_recommendation\"]//td[@class=\"submitButton\"]/a")).click();
     }
 
-    @And("I click on I'll Reserve button")
+    @And("^I click on I'll Reserve button$")
     public void iClickOnILlReserveButton() throws Throwable {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//div[@class='hprt-reservation-cta']/button")).click();
     }
 
-    @Then("Checkout page is displayed")
+    @Then("^Checkout page is displayed$")
     public void checkoutPageIsDisplayed() {
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -218,19 +218,19 @@ public class BookingStepdefs {
         assert displayedEndDate.contains(endDate) && displayedStartDate.contains(startDate);
     }
 
-    @And("I enter valid booking information")
+    @And("^I enter valid booking information$")
     public void iEnterValidBookingInformation() {
         this.enteredName = getSaltString(6);
         driver.findElement(By.id("lastname")).sendKeys(enteredName);
     }
 
-    @And("I click on Next: Final Details button")
+    @And("^I click on Next: Final Details button$")
     public void iClickOnNextFinalDetailsButton() {
         driver.findElement(By.xpath("//span[contains(text(),\"Final\")]")).click();
     }
 
 
-    @And("Final Details page is displayed")
+    @And("^Final Details page is displayed$")
     public void finalDetailsPageIsDisplayed() {
         Boolean containsName = driver.findElement(By.xpath("(//div[@class = \"book-form-field field_name_full_name\"]/div)[2]")).getText().contains(this.enteredName);
         Boolean containsEmail = driver.findElement(By.xpath("(//div[@id=\"label_email\"]/div)[2]/ins")).getText().contains(this.email);
@@ -250,7 +250,7 @@ public class BookingStepdefs {
 
     }
 
-    @And("I click on I'll Reserve button for the most expensive available room in the hotel")
+    @And("^I click on I'll Reserve button for the most expensive available room in the hotel$")
     public void iClickOnILlReserveButtonForTheMostExpensiveAvailableRoomInTheHotel(){
         List<WebElement> priceElements = driver.findElements(By.xpath("//table[@id=\"hprt-table\"]//option[@value = \"1\"]"));
         WebElement highestPriceElement = null;
