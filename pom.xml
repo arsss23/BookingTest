@@ -7,26 +7,25 @@
     <groupId>org.example</groupId>
     <artifactId>BookingTest</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <profiles>
-        <profile>
-            <id>selenium-tests</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>testng.xml</suiteXmlFile>
-                            </suiteXmlFiles>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 
     <properties>
+        <cucumber.version>4.2.0</cucumber.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>1.9</maven.compiler.target>
         <maven.compiler.source>1.9</maven.compiler.source>
@@ -43,18 +42,6 @@
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
         </dependency>
-        <!--<dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>6.9.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>6.9.0</version>
-            <scope>test</scope>
-        </dependency>-->
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-core</artifactId>
@@ -71,8 +58,36 @@
             <version>1.2.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- For Extent Reports -->
+        <!-- Extent Report Adapter for Cucumber -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports-cucumber4-adapter</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>4.0.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.28</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.10.2</version>
+        </dependency>
     </dependencies>
-
-
-
 </project>

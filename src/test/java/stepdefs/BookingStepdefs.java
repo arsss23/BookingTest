@@ -78,7 +78,7 @@ public class BookingStepdefs {
     @When("^I enter valid password$")
     public void iEnterValidPassword() {
         String password = getSaltString(10) + "a";
-        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("new_password")).sendKeys(password);
         driver.findElement(By.id("confirmed_password")).sendKeys(password);
     }
 
