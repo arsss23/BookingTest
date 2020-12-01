@@ -1,15 +1,10 @@
 package stepdefs;
 
-/*import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;*/
-import cucumber.api.PendingException;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +26,8 @@ public class BookingStepdefs {
     private String rating;
     private String selectedStartDates;
     private String selectedEndDates;
+
+
 
     protected String getSaltString(int length) {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -56,8 +53,6 @@ public class BookingStepdefs {
 
     @Given("^I am in Sign Up page$")
     public void iAmInSignUpPage() {
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.get("https://account.booking.com/register");

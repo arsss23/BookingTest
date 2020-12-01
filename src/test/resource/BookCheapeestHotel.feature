@@ -1,5 +1,4 @@
 Feature: Book Cheapest Hotel
-
   Scenario: Book cheapest hotel in city
     Given I have account created
     And main page is opened

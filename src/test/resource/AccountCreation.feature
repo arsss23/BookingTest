@@ -11,3 +11,4 @@ Feature: Create Account
     Then My Dashboard page is opened
     And correct value is prefilled in email verification placeholder
   #//based on registered email
+
