@@ -6,13 +6,19 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -27,7 +33,19 @@ public class BookingStepdefs {
     private String selectedStartDates;
     private String selectedEndDates;
 
-
+    @Parameters("Port")
+    @BeforeClass
+    public void initiateDriver(String Port) throws MalformedURLException {
+        if(Port.equalsIgnoreCase("9001"))
+        {
+            driver = new RemoteWebDriver(new URL("http:localhost:4444/wd/hub"), DesiredCapabilities.chrome());
+            driver.manage().window().maximize();
+        }
+        else if(Port.equalsIgnoreCase("9002")){
+            driver = new RemoteWebDriver(new URL("http:localhost:4444/wd/hub"), DesiredCapabilities.firefox());
+            driver.manage().window().maximize();
+        }
+    }
 
     protected String getSaltString(int length) {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -53,7 +71,6 @@ public class BookingStepdefs {
 
     @Given("^I am in Sign Up page$")
     public void iAmInSignUpPage() {
-        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.get("https://account.booking.com/register");
         driver.findElement(By.id("onetrust-accept-btn-handler")).click();
